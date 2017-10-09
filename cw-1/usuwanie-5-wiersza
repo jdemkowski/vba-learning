@@ -1,0 +1,9 @@
+Sub usuwanie_5_wiersza()
+'
+' usuwanie_5_wiersza Makro
+'
+' Klawisz skrótu: Ctrl+Shift+Q
+'
+    Rows("5:5").Select
+    Selection.Delete Shift:=xlUp
+End Sub
