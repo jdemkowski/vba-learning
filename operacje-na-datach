@@ -2,7 +2,7 @@ Sub operacje_na_datach()
 'dlaczego to kurwa nie działa?
 'a działa np. Format(Now, "dd-mmm-yyyy hh:mm")
 'czy Format(Now, "ddd-mm-yyyy hh:mm")
-Cells(1, 1) = Format(Now, "dd - mm - yyyy hh:mm")
+Cells(1, 1) = Format(Now, "dd-mm-yyyy hh:mm")
 'musi być jakaś automatyczna konwersja
 'to już działa jak ma działać
 Cells(2, 1) = Month(Now)
