@@ -1,0 +1,14 @@
+Sub kwartał()
+'makro zwraca nr kwartału na podstawie nru miesiąca
+Select Case DatePart("m", Date)
+Case 1, 2, 3
+    'Range("A2") to to samo co Cells(2,1)
+    Range("A2").Value = 1
+Case 4, 5, 6
+    Range("A2").Value = 2
+Case 7, 8, 9
+    Range("A2").Value = 3
+Case 10, 11, 12
+    Range("A2").Value = 4
+End Select
+End Sub
