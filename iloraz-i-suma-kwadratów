@@ -1,0 +1,7 @@
+Sub iloraz_i_suma_kwadratów()
+Dim a, b As Double
+a = InputBox("Podaj pierwszą liczbą (dzielną)")
+b = InputBox("Podaj drugą liczbę (dzielnik), różną od zera")
+MsgBox a / b
+Sheets("Arkusz1").Cells(8, 4) = a ^ 2 + b ^ 2
+End Sub
