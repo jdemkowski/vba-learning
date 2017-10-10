@@ -1,0 +1,14 @@
+Sub tabliczka_mnożenia()
+Dim i, j As Integer
+For i = 2 To 11
+    Cells(i, 1) = i - 1
+Next i
+For j = 2 To 11
+    Cells(1, j) = j - 1
+Next j
+For i = 2 To 11
+    For j = 2 To 11
+        Cells(i, j) = (i - 1) * (j - 1)
+    Next j
+Next i
+End Sub
