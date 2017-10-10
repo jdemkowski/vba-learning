@@ -1,0 +1,13 @@
+Sub znak()
+Dim liczba As Double
+liczba = InputBox("Podaj liczbę")
+If liczba > 0 Then
+    MsgBox ("Liczba " + CStr(liczba) + " jest dodatnia")
+Else
+    If liczba < 0 Then
+        MsgBox ("Liczba " + CStr(liczba) + " jest ujemna")
+    Else
+        MsgBox ("Liczba " + CStr(liczba) + " jest równa zeru")
+    End If
+End If
+End Sub
