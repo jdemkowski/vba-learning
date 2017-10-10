@@ -1,0 +1,13 @@
+Sub test_cyfry()
+MsgBox ("To makro sprawdzi czy podany ciąg znaków zawiera cyfry.")
+Dim s As String
+s = InputBox("Podaj dowolny ciąg znaków.")
+If InStr(1, s, "0") = 0 And InStr(1, s, "1") = 0 And InStr(1, s, "2") = 0 _
+And InStr(1, s, "3") = 0 And InStr(1, s, "4") = 0 And InStr(1, s, "5") = 0 _
+And InStr(1, s, "6") = 0 And InStr(1, s, "7") = 0 And InStr(1, s, "8") = 0 _
+And InStr(1, s, "9") = 0 Then
+    MsgBox ("Podany ciąg znaków nie zawierał cyfr.")
+Else
+    MsgBox ("Podany ciąg znaków zawierał co najmniej jedną cyfrę.")
+End If
+End Sub
