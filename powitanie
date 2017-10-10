@@ -1,0 +1,6 @@
+Sub powitanie()
+Dim imie As String
+imie = InputBox("Podaj Twoje imię")
+nazwisko = InputBox("Podaj Twoje nazwisko")
+MsgBox ("Nazywasz się " + imie + " " + nazwisko)
+End Sub
