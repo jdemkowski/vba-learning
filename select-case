@@ -1,0 +1,18 @@
+Sub dzien_tygodnia()
+Select Case DatePart("w", Date)
+Case 1
+Range("A2").Value = "Niedziela, jutro ch... poniedziałek"
+Case 2
+Range("A2").Value = "Dzisiaj jest poniedziałek, początek wspaniałego tygodnia"
+Case 3
+Range("A2").Value = "Wtorek, na szczęście to nie poniedziałek"
+Case 4
+Range("A2").Value = "Środa, za chwilę z górki"
+Case 5
+Range("A2").Value = "Czwartek, wczoraj chyba przesadziłeś, boli głowa co ?"
+Case 6
+Range("A2").Value = "Cudownie już piątek"
+Case 7
+Range("A2").Value = "Sobota, co Ci będę mówił"
+End Select
+End Sub
