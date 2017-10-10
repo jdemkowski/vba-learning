@@ -1,0 +1,10 @@
+Sub operacje_na_stringach()
+Dim napis As String
+napis = InputBox("Podaj proszę dowolny ciąg znaków")
+Cells(1, 1) = UCase(napis)
+Cells(2, 1) = Len(napis)
+Cells(3, 1) = Left(napis, 5)
+Cells(4, 1) = Right(napis, 5)
+Cells(5, 1) = StrReverse(napis)
+Cells(6, 1) = Replace(napis, "r", "", 1)
+End Sub
