@@ -1,0 +1,10 @@
+Sub test0()
+MsgBox ("To makro sprawdzi czy podany ciąg znaków zawiera cyfrę 0.")
+Dim s As String
+s = InputBox("Podaj dowolny ciąg znaków.")
+If InStr(1, s, "0") = 0 Then
+    MsgBox ("Podany ciąg znaków nie zawierał cyfry 0.")
+Else
+    MsgBox ("Podany ciąg znaków zawierał cyfrę 0.")
+End If
+End Sub
