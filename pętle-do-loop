@@ -2,14 +2,14 @@ Sub pętle_do_loop()
 Dim opt, i, j As Integer
 j = 0
 Do
-    MsgBox "Wybierz pętlę, której chcesz użyć:" & vbCrLf & _
+    opt = InputBox("Wybierz pętlę, której chcesz użyć:" & vbCrLf & _
     "1. Do ... Loop" & vbCrLf & _
     "2. Do While ... loop" & vbCrLf & _
     "3. Do ... Loop While" & vbCrLf & _
     "4. Do Until ... Loop" & vbCrLf & _
     "5. Do ... Until Loop" & vbCrLf & _
-    "0. Wyjście", vbOKOnly, "Menu"
-    opt = InputBox("Którą pętlę wybierasz?")
+    "0. Wyjście" & vbCrLf & vbCrLf & _
+    "Którą pętlę wybierasz?", "Menu")
     If opt = 1 Or opt = 2 Or opt = 3 Or opt = 4 Or opt = 5 Then
         j = j + 1
     End If
