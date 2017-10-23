@@ -1,0 +1,17 @@
+Sub max_obrotow()
+i = 1
+Do
+i = i + 1
+klucz = Cells(i, 1)
+max = Cells(i, 3)
+poz = i
+Do While Cells(i + 1, 1) = klucz
+    i = i + 1
+    If Cells(i, 3) > max Then
+        poz = i
+        max = Cells(i, 3)
+    End If
+Loop
+Cells(poz, 4) = "max"
+Loop Until Cells(i + 1, 1) = ""
+End Sub
