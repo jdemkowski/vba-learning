@@ -1,0 +1,9 @@
+Sub tablica2d()
+Dim tab2d(1 To 10, 1 To 10) As Integer
+For i = 1 To 10
+    For j = 1 To 10
+        tab2d(i, j) = 10 * (i - 1) + j
+        Cells(i, j) = tab2d(i, j)
+    Next j
+Next i
+End Sub
