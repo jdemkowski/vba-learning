@@ -1,4 +1,6 @@
+'
 ' http://skutecznyoffice.pl/jak-uzyskac-aktualne-kursy-walut-w-excelu-w-30-sekund/
+'
 
 Function przelicz_na_pln(waluta As String, wartość As Double) As Double
 Dim wk(1 To 100, 1 To 3) As String
