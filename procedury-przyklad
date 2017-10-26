@@ -12,7 +12,7 @@ Sub kalkulator_wynagrodzenia()
 Dim x As Double
 odp = InputBox("Podaj wysokość Twojego miesięcznego wynagrodzenia brutto:", "Kwota brutto")
 wynagrodzenie CDbl(odp), x
-MsgBox "Kwota netto wynosi " + CStr(x) + ".", vbOKOnly, "Kwota netto"
+MsgBox "Kwota netto wynosi " + CStr(x) + " zł.", vbOKOnly, "Kwota netto"
 End Sub
 
 Sub wynagrodzenie(brutto As Double, netto As Double)
