@@ -1,0 +1,18 @@
+Sub proc_fn()
+MsgBox (pole_pow(3, 4))
+End Sub
+
+Function pole_pow(a As Integer, b As Integer) As Integer
+pole_pow = a * b
+End Function
+
+Sub kalkulator_plac()
+Dim odp As String
+odp = InputBox("Podaj wysokość Twojego miesięcznego wynagrodzenia brutto:", "Kwota brutto")
+MsgBox "Kwota netto wynosi " + CStr(placa_netto(CDbl(odp))) + " zł.", vbOKOnly, "Kwota netto"
+End Sub
+
+Function placa_netto(brutto As Double) As Double
+placa_netto = brutto - (brutto - (brutto * 0.2)) * 0.18
+' = brutto - bruttto * 0.8 * 0.18 = brutto * 0.856
+End Function
