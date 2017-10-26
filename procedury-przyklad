@@ -1,0 +1,22 @@
+Sub proc()
+Dim p As Integer
+pole 4, 5, p
+MsgBox p
+End Sub
+
+Sub pole(a As Integer, b As Integer, p As Integer)
+p = a * b
+End Sub
+
+Sub kalkulator_wynagrodzenia()
+Dim x As Double
+odp = InputBox("Podaj wysokość Twojego miesięcznego wynagrodzenia brutto:", "Kwota brutto")
+wynagrodzenie CDbl(odp), x
+MsgBox "Kwota netto wynosi " + CStr(x) + ".", vbOKOnly, "Kwota netto"
+End Sub
+
+Sub wynagrodzenie(brutto As Double, netto As Double)
+' w WIELKIM uproszczeniu
+netto = brutto - (brutto - (brutto * 0.2)) * 0.18
+' = brutto - bruttto * 0.8 * 0.18 = brutto * 0.856
+End Sub
