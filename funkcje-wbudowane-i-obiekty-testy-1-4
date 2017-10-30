@@ -1,0 +1,50 @@
+Sub testy_1()
+Range("A1").Value = "Wartość komórki A1"
+Cells(5, 2).Value = "Wartość komórki B5"
+Range("A1:B5").Select 'zaznacza zakres A1:B5
+End Sub
+
+Sub testy_2()
+Sheets("Arkusz5").Range("A1").Value = "Wartość komórki A1"
+Sheets("Arkusz5").Cells(5, 2).Value = "Wartość komórki B5"
+' ten moment się wypierdala kiedy odpalamy makro będąc w innym arkuszu niż "Arkusz5"
+' dodanie poniższego "activate'a" rozwiązuje problem
+Sheets(7).Activate
+Sheets(7).Range("A1:B5").Select 'zaznacza zakres A1:B5
+Sheets(7).Range("B3").Activate
+End Sub
+
+Sub testy_3()
+For i = 1 To 10
+    Worksheets("Arkusz5").Range("A" & CStr(((i - 1) * 10) + 1) & ":F" & CStr((i * 10))).Select
+    MsgBox "Ok"
+Next i
+End Sub
+
+Sub testy_4()
+' makro ma za zadanie skopiować zakres z arkusza "Arkusz4" do arkusza "Arkusz5"
+' czym się różni metoda (?) "select" od "activate" ???
+' czym się różni "Sheets" od "Worksheets" ???
+Sheets("Arkusz4").Select
+' MsgBox "ok"
+Range("A1:J10").Select
+' MsgBox "ok"
+Selection.Copy
+' MsgBox "ok"
+Sheets("Arkusz5").Select
+' MsgBox "ok"
+Range("A5").Select
+' MsgBox "ok"
+ActiveSheet.Paste
+' MsgBox "ok"
+Range("A5").Select
+' MsgBox "ok"
+Sheets("Arkusz4").Select
+' MsgBox "ok"
+Application.CutCopyMode = False
+' MsgBox "ok"
+Range("A1").Select
+' MsgBox "ok"
+Sheets("Arkusz5").Select
+' MsgBox "ok"
+End Sub
