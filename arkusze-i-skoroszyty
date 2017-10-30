@@ -1,0 +1,34 @@
+Sub testy_5()
+' Sheets("Arkusz5").Cells(1, 1) - tak to się można kurwa jedynie odwołać
+' wybrać arkusz można tak, ponadto dwie poniższe operacje nie można scalić w jedną!
+Sheets("Arkusz5").Select
+Range("A1").Select
+' Ale tak już można:
+Sheets("Arkusz5").Range("B2") = "chuj"
+ActiveSheet.Range("B2").Select
+End Sub
+
+Sub nowy_arkusz()
+Worksheets.Add().Name = "Ojojoj"
+End Sub
+Sub nowy_arkusz_ostatni()
+Worksheets.Add(After:=Worksheets(Worksheets.Count)).Name = "ostatni"
+End Sub
+
+'Zadanie
+'Napisz makro które stworzy arkusze odpowiadające kolejnym 12-tu miesiącom w latach 2013, 2014 i 2015.
+Sub arkusze_miesiace()
+For i = 2015 To 2017
+    For j = 1 To 12
+        Worksheets.Add(After:=Worksheets(Worksheets.Count)).Name = CStr(j) + "-" + CStr(i)
+    Next j
+Next i
+End Sub
+
+'Zadanie polega na wpisaniu w komórkę A1 każdego arkusza jego nazwy
+Sub all_sheet()
+For Each ark In Worksheets
+    ark.Select 'ark.select miałoby takie samo działanie
+    Cells(1, 1) = ActiveSheet.Name
+Next ark
+End Sub
