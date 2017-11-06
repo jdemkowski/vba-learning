@@ -1,0 +1,52 @@
+Sub klienci_arkusze()
+'
+' to makro, działając na arkuszu "obroty" w aktywnym skoroszycie, rozpoczynając od drugiego wiersza,
+' kopiuje zakresy grupowane po wartości w pierwszej kolumnie A i wkleja je do nowych arkuszy,
+' nazywając każdy arkusz wartością, po której było grupowanie
+'
+Dim i, j, l As Integer
+i = 1
+Do Until Worksheets("obroty").Cells(i + 1, 1) = ""
+    i = i + 1
+    Worksheets.Add(after:=Worksheets(Worksheets.Count)).Name = Worksheets("obroty").Cells(i, 1).Value
+    j = i + 1
+    l = 0
+    Do While Worksheets("obroty").Cells(j, 1) = Worksheets("obroty").Cells(i, 1)
+        l = l + 1
+        j = j + 1
+    Loop
+    Worksheets("obroty").Range("A" & CStr(i) & ":C" & CStr(i + l)).Copy
+    ActiveSheet.Paste
+    Cells(1, 1).Select
+    Worksheets("obroty").Select
+    i = i + l
+Loop
+Application.CutCopyMode = False
+End Sub
+
+' A tu kod autora ćwiczenia
+'
+Sub ćw_21()
+i = 2
+Do
+    klucz = Cells(i, 1)
+    zakres1 = i
+    zakres2 = i
+    Do While klucz = Cells(i + 1, 1)
+        i = i + 1
+        zakres2 = i
+    Loop
+    Worksheets.Add(After:=Worksheets(Worksheets.Count)).Name = "Klient " + CStr(klucz)
+    Cells(1, 1) = "Kod klienta"
+    Cells(1, 2) = "Spółka"
+    Cells(1, 3) = "Obroty w 2013"
+    Sheets("Obroty").Select
+    Range("A" + CStr(zakres1) + ":" + "C" + CStr(zakres2)).Select
+    Selection.Copy
+    Sheets("Klient " + CStr(klucz)).Select
+    Range("A2").Select
+    ActiveSheet.Paste
+    Sheets("Obroty").Select
+    i = i + 1
+Loop Until Cells(i, 1) = ""
+End Sub
