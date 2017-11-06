@@ -1,0 +1,17 @@
+Sub usuwanie_arkuszy_war()
+'
+' takie makro usuwa spośród wszystkich arkuszy w aktywnym skoroszycie te,
+' które w zakresie A1:J10 posiadają choć jedną pustą komórkę
+'
+For Each arkusz In ActiveWorkbook.Worksheets
+    For i = 1 To 10
+        For j = 1 To 10
+            If arkusz.Cells(i, j) = "" Then
+                arkusz.Delete
+                i = 10
+                j = 10
+            End If
+        Next j
+    Next i
+Next arkusz
+End Sub
