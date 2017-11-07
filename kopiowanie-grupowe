@@ -23,7 +23,7 @@ Do Until Worksheets("obroty").Cells(i + 1, 1) = ""
 Loop
 Application.CutCopyMode = False
 End Sub
-
+'
 ' A tu kod autora ćwiczenia
 '
 Sub ćw_21()
@@ -49,4 +49,45 @@ Do
     Sheets("Obroty").Select
     i = i + 1
 Loop Until Cells(i, 1) = ""
+End Sub
+'
+' i jeszcze raz mój zmodyfikowany kod
+'
+Sub klienci_arkusze_v2()
+'
+' to makro, działając na arkuszu "obroty" w aktywnym skoroszycie, rozpoczynając od drugiego wiersza,
+' kopiuje zakresy grupowane po wartości w pierwszej kolumnie A i wkleja je do nowych arkuszy,
+' nazywając każdy arkusz wartością, po której było grupowanie
+'
+Worksheets("obroty").Select
+Dim i, j, klucz, zakres1, zakres2 As Integer
+Dim Naglowek(1 To 3) As String
+Naglowek(1) = "Kod klienta"
+Naglowek(2) = "Spółka"
+Naglowek(3) = "Obroty w 2013"
+i = 1
+Do Until Cells(i + 1, 1) = ""
+    i = i + 1
+    klucz = Cells(i, 1)
+    zakres1 = i
+    zakres2 = i
+    Do While klucz = Cells(i + 1, 1)
+        i = i + 1
+        zakres2 = i
+    Loop
+    Worksheets.Add(after:=Worksheets(Worksheets.Count)).Name = "Klient " + CStr(klucz)
+    For j = 1 To 3
+        Cells(1, j) = Naglowek(j)
+    Next j
+    Worksheets("obroty").Select
+    Range("A" + CStr(zakres1) + ":C" + CStr(zakres2)).Select
+    Selection.Copy
+    Worksheets("Klient " + CStr(klucz)).Select
+    Range("A2").Select
+    ActiveSheet.Paste
+    Cells(1, 1).Select
+    Worksheets("obroty").Select
+    i = i + l
+Loop
+Application.CutCopyMode = False
 End Sub
