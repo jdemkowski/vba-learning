@@ -1,0 +1,7 @@
+Sub new_workbook()
+Dim plik As Workbook
+Set plik = Workbooks.Add
+plik.Worksheets("Arkusz1").Cells(1, 1) = "Udało się utworzyć nowy plik i coś w nim zapisać"
+plik.SaveAs ("C:\Users\jdemkowski\Documents\nowy_plik.xlsx")
+plik.Close
+End Sub
