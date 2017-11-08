@@ -1,0 +1,29 @@
+Sub kopiowanie_źródeł()
+'
+' makro tworzy nowy skoroszyt i kopiuje do niego zawartość (wszystkie komórki) z arkuszy
+' "źródło 1.xlsx", ... , "źródło 5.xlsx" z lokalizacji "C\zrodlo\" i zapisuje go pod nazwą "wiele_źródeł.xlsx"
+' w lokalizacji "%userprofile%\vba\" i zamyka
+'
+Application.ScreenUpdating = False
+Dim main As Workbook
+Set main = Workbooks.Add
+Dim plik As Workbook
+Dim nazwa_ark As String
+For i = 1 To 5
+    ' main.Activate - to niepotrzebne
+    Set plik = Workbooks.Open("C:\zrodlo\źródło" + CStr(i) + ".xlsx")
+    plik.Worksheets(1).Select
+    nazwa_ark = plik.Worksheets(1).Name
+    Cells.Select
+    Selection.Copy
+    main.Worksheets(1).Activate
+    Worksheets.Add(After:=Worksheets(Worksheets.Count)).Name = nazwa_ark
+    Cells(1, 1).Select
+    ActiveSheet.Paste
+    Cells(1, 1).Select
+    plik.Save
+    plik.Close
+Next i
+main.SaveAs (Environ("userprofile") + "\vba\wiele_źródeł.xlsx")
+main.Close
+End Sub
