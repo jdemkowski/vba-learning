@@ -1,0 +1,19 @@
+Sub klienci_arkusze_średnie()
+'
+' makro przechodzi każdy arkusz poza arkuszami "Obroty" i "Hierarchia spółek"
+' i wstawia w pierwszej pustej komórce pod trzecią kolumną średnią z wartości
+' komórek powyżej bez nagłówka
+'
+Dim i As Integer
+For Each arkusz In Worksheets
+    If arkusz.Name <> "Obroty" And arkusz.Name <> "Hierarchia spółek" Then
+        arkusz.Select
+        i = 1
+        Do
+            i = i + 1
+        Loop Until Cells(i + 1, 1) = ""
+        Cells(i + 1, 3).Select
+        ActiveCell.FormulaR1C1 = "=AVERAGE(R[-" + CStr(i - 1) + "]C:R[-1]C)"
+    End If
+Next arkusz
+End Sub
