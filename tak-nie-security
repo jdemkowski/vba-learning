@@ -1,0 +1,33 @@
+Sub TAK_NIE()
+MSG1 = MsgBox("Tak czy Nie", vbYesNo)
+If MSG1 = vbYes Then
+    MsgBox "Wybrałeś Tak"
+Else
+    MsgBox "Wybrałeś Nie"
+End If
+End Sub
+
+Sub klienci_arkusze_średnie()
+'
+' makro przechodzi każdy arkusz rozpoczynający się od "Klient" (pierwsze 6 znaków)
+' i wstawia w pierwszej pustej komórce pod trzecią kolumną formułę liczącą średnią
+' z wartości komórek powyżej bez nagłówka
+'
+Dim i As Integer
+MSG1 = MsgBox("Czy na pewno chcesz wykonać to makro?", vbYesNo)
+If MSG1 = vbYes Then
+    For Each arkusz In Worksheets
+        If Left(arkusz.Name, 6) = "Klient" Then
+            arkusz.Select
+            i = 1
+            Do
+                i = i + 1
+            Loop Until Cells(i + 1, 1) = ""
+            Cells(i + 1, 3).Select
+            ActiveCell.FormulaR1C1 = "=AVERAGE(R[-" + CStr(i - 1) + "]C:R[-1]C)"
+        End If
+    Next arkusz
+Else
+    MsgBox "Zrezygnowano z wykonania makra."
+End If
+End Sub
