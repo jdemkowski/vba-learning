@@ -1,2 +1,2 @@
 # vba-learning
-I will place here vba code samples throuhout my study.
+I will place here vba code samples throughout my study.
