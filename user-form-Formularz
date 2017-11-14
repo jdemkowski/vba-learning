@@ -1,0 +1,58 @@
+' obsługa przycisku uruchamiającego formularz usera
+' wraz z "załadowaniem" danych do combobox'a
+' kod najlepiej umieścić w arkuszu, w którym znajduje
+' się przycisk CommandButton1
+' 
+Private Sub CommandButton1_Click()
+With Formularz.ComboBox1
+.AddItem "Item1"
+.AddItem "Item2"
+.AddItem "Item3"
+.AddItem "Item4"
+End With
+Formularz.Show
+End Sub
+' 
+' obsługa przycisków znajdujących się w formularzu
+' innymi słowy kod formularza pod "view code"
+' 
+' Deklaracje
+Dim i As Integer
+' 
+' inny sposób dodania item'ów do listy rozwijanej comboboxa:
+' 
+Private Sub UserForm_Initialize()
+  ComboBox1.List = Array("Item1", "Item2", "Item3", "Item4")
+End Sub
+' 
+' przycisk w stylu "dodaj", czy "ok" w formularzu
+' 
+Private Sub CommandButton1_Click()
+If Formularz.TextBox1.Value <> "" And Formularz.TextBox2.Value <> "" And _
+Formularz.TextBox3.Value <> "" And Formularz.TextBox4.Value <> "" Then
+    Cells(3, 1).Select
+    i = 0
+    Do While Cells(4 + i, 1) <> ""
+        i = i + 1
+    Loop
+    Cells(4 + i, 1) = i + 1
+    Cells(4 + i, 2) = TextBox1
+    Cells(4 + i, 3) = TextBox2
+    Cells(4 + i, 4) = TextBox3
+    Cells(4 + i, 5) = TextBox4
+    Cells(4 + i, 6) = ComboBox1
+    Formularz.TextBox1.Value = ""
+    Formularz.TextBox2.Value = ""
+    Formularz.TextBox3.Value = ""
+    Formularz.TextBox4.Value = ""
+    Formularz.ComboBox1.Value = ""
+Else
+    MsgBox "Wprowadź dane!"
+End If
+End Sub
+' 
+' przycisk w stylu "anuluj", czy "zakończ" w formularzu
+' 
+Private Sub CommandButton2_Click()
+Unload Me
+End Sub
