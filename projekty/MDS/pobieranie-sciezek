@@ -1,0 +1,34 @@
+Sub PobieranieSciezek()
+    Dim tablicaSciezek As Variant
+    Dim filtryPlikow As String
+    Dim indeksFiltruDomyslnego As Integer
+    Dim tytulOknaOtwierania As String
+'   Definicja listy filtrów plików
+    filtryPlikow = "Pliki Excel (*.xls;*.xlsx),*.xls;*.xlsx," & _
+                   "Pliki Excel XLSX (*.xlsx),*.xlsx," & _
+                   "Pliki Excel 97-2003 (*.xls),*.xls," & _
+                   "Pliki tekstowe i CSV (*.txt;*.csv),*.txt;*.csv," & _
+                   "Wszystkie pliki (*.*),*.*"
+'   Domyślnie wyświetlany jest filtr *.*
+    indeksFiltruDomyslnego = 5
+'   Definicja tytułu okna dialogowego
+    tytulOknaOtwierania = "Wybierz pliki do importu"
+'   Pobranie nazw plików
+'   Dla parametru MultiSelect domyślnie jest False
+    tablicaSciezek = Application.GetOpenFilename( _
+        FileFilter:=filtryPlikow, _
+        FilterIndex:=indeksFiltruDomyslnego, _
+        Title:=tytulOknaOtwierania, _
+        MultiSelect:=True _
+    )
+    If IsArray(tablicaSciezek) = False Then
+        If tablicaSciezek = False Then
+            MsgBox "Nie wybrano żadnego pliku!"
+            Exit Sub
+        End If
+    End If
+    Debug.Print "Wybrano pliki:"
+    For Each SciezkaPliku In tablicaSciezek
+        Debug.Print SciezkaPliku
+    Next SciezkaPliku
+End Sub
