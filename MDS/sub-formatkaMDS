@@ -1,0 +1,114 @@
+Sub formatkaMDS()
+    
+    Dim lngCount As Long
+    
+    Dim wsResults As Worksheet
+    
+    Dim wbMain As Workbook, wbSource As Workbook
+    Set wbMain = ThisWorkbook
+    
+    Dim rnData As Range
+    '
+    '====================== OBSŁUGA OTWIERANIA PLIKÓW =========================
+    '
+    ' Deklarujemy zmienną jako obiekt FileDialog.
+    '
+    Dim fd As FileDialog
+    '
+    ' Tworzymy obiekt FileDialog jako okno dialogowe FilePicker.
+    '
+    Set fd = Application.FileDialog(msoFileDialogFilePicker)
+    '
+    ' Deklarujemy zmienną do przechowywania ścieżki każdego z wybranych
+    ' elementów. Pomimo, że ścieżka jest typu String, zmienna musi być
+    ' typu Variant, ponieważ pętle For Each...Next działają tylko ze
+    ' zmiennymi typu Variant i Obiektami.
+    '
+    Dim vrtSelectedItem As Variant
+    '
+    ' Używamy bloku With...End With, żeby odwoływać się do obiektu FileDialog.
+    '
+    With fd
+        '
+        ' Używamy metody Show, żeby wyswietlić okno dialogowe FilePicker
+        ' i zwrócić akcję wykonaną przez użytkownika.
+        ' Użytkownik nacisnął przycisk akcji "Otwórz" (Open).
+        '
+        If .Show = -1 Then
+        
+            Application.ScreenUpdating = False
+            '
+            '========================= OBSŁUGA DANYCH ========================
+            '
+            ' Tworzymy arkusz wsResults, do którego będą wklejane dane
+            ' z kolejno otwieranych plików.
+            '
+            Set wsResults = Worksheets.Add(After:=Worksheets(Worksheets.Count))
+            lngCount = 2
+            '
+            ' Przechodzimy przez każdy napis w kolekcji FileDialogSelectedItems.
+            '
+            For Each vrtSelectedItem In .SelectedItems
+                '
+                ' vrtSelectedItem jest Stringiem, który przechowuje ścieżkę każdego
+                ' z wybranych elementów. Możesz użyć dowolnych funkcji plikowych
+                ' we/wy, które chcesz, żeby działały z tą ścieżką.
+                '
+                Set wbSource = Workbooks.Open(vrtSelectedItem)
+                ' zawsze zaznaczany jest zakres o początku w komórce "A6"
+                wbSource.Sheets("Sheet").Range("A6", Sheets("Sheet").Range("A6"). _
+                End(xlDown).End(xlToRight)).Copy
+                ' dalej jest wklejany do wbMain'a w 3 kolumnie pod nagłówkami
+                wbMain.Sheets(wsResults.Name).Cells(lngCount, 3).PasteSpecial _
+                Paste:=xlPasteValues
+                ' licznik zwiększa się o liczbę wierszy kopiowanego zakresu danych
+                lngCount = lngCount + wbSource.Sheets("Sheet"). _
+                Range("A6", Sheets("Sheet").Range("A6").End(xlDown)).Rows.Count
+                ' prymitywnie opróżniamy schowek (Clipboard)
+                Application.CutCopyMode = False
+                ' zamykamy plik
+                wbSource.Close False
+                ' i następny
+            Next vrtSelectedItem
+            Set rnData = wbMain.Sheets(wsResults.Name).Range("A2:J" & lngCount - 1)
+            '
+            '===================== KONIEC OBSŁUGI DANYCH ====================
+            '
+            ' Użytkownik nacisnął przycisk "Anuluj" (Cancel).
+            '
+        Else
+            MsgBox "Anulowano operację."
+            Exit Sub
+        End If
+        
+    End With
+    '
+    ' Ustawienie zmiennej obiektowej na Nothing.
+    '
+    Set fd = Nothing
+    '
+    '==================== KONIEC OBSŁUGI OTWIERANIA PLIKÓW =====================
+    '
+    With rnData
+        .Columns(1).Value = DatePart("yyyy", Date, vbMonday)
+        .Columns(2).Value = DatePart("q", Date, vbMonday)
+        .Columns(3).NumberFormat = "0"
+        .Columns(3).Value = .Columns(3).Value
+        .Columns(4).NumberFormat = "0"
+        .Columns(4).Value = .Columns(4).Value
+        .Columns(5).NumberFormat = "0.0000"
+        .Columns(5).Value = .Columns(5).Value
+        .Columns(10).Value = .Columns(6).Value
+        .Columns(6).Value = 1
+        .Columns(7).Value = InputBox("Podaj datę startu rozliczania w formacie yyyy-mm-dd", "Wprowadź dane", DateAdd("d", 3, Date))
+        .Columns(8).Value = InputBox("Podaj datę końca rozliczania w formacie yyyy-mm-dd", "Wprowadź dane", DateAdd("d", 30, Date))
+        .Columns(9).Value = 1
+    End With
+    '
+    ' Wywołanie procedury naglowkiMDS, która działając w aktywnym
+    ' arkuszu dodatkowo dostosowuje szerokośc kolumn do ich zawartości.
+    '
+    Call naglowkiMDS
+    Cells(1, 1).Select
+    MsgBox "Operacja zakończona powodzeniem."
+End Sub
