@@ -100,8 +100,10 @@ Sub formatkaMDS()
         .Columns(5).Value = .Columns(5).Value
         .Columns(10).Value = .Columns(6).Value
         .Columns(6).Value = 1
-        .Columns(7).Value = InputBox("Podaj datę startu rozliczania w formacie yyyy-mm-dd", "Wprowadź dane", DateAdd("d", 3, Date))
-        .Columns(8).Value = InputBox("Podaj datę końca rozliczania w formacie yyyy-mm-dd", "Wprowadź dane", DateAdd("d", 30, Date))
+        .Columns(7).Value = InputBox("Podaj datę startu rozliczania w formacie yyyy-mm-dd", _
+            "Wprowadź dane", DateAdd("d", 4, Date))
+        .Columns(8).Value = InputBox("Podaj datę końca rozliczania w formacie yyyy-mm-dd", _
+            "Wprowadź dane", DateAdd("d", 60, Date))
         .Columns(9).Value = 1
     End With
     '
@@ -111,4 +113,6 @@ Sub formatkaMDS()
     Call naglowkiMDS
     Cells(1, 1).Select
     MsgBox "Operacja zakończona powodzeniem."
+    Application.ScreenUpdating = True
+    
 End Sub
