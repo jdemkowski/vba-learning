@@ -125,7 +125,8 @@ Sub formatkaMDS()
         .Columns(7).Value = InputBox("Podaj datę startu rozliczania w formacie yyyy-mm-dd", _
             "Wprowadź dane", CDate(WorksheetFunction.WorkDay(Date, 4)))
         .Columns(8).Value = InputBox("Podaj datę końca rozliczania w formacie yyyy-mm-dd", _
-            "Wprowadź dane", CDate(WorksheetFunction.EoMonth(Date, 1)))
+            "Wprowadź dane", CDate(WorksheetFunction.EoMonth(Date, _
+            DatePart("m", CDate(WorksheetFunction.WorkDay(Date, 4)), vbMonday) Mod 2)))
         .Columns(9).Value = 1
     End With
     '
